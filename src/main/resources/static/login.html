@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hoora Login</title>
+
+    <style>
+
+        body{
+        font-family:Arial;
+        background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        }
+
+        .card{
+        background:white;
+        padding:40px;
+        width:350px;
+        border-radius:10px;
+        box-shadow:0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        input{
+        width:100%;
+        padding:12px;
+        margin:10px 0;
+        border:1px solid #ddd;
+        border-radius:5px;
+        }
+
+        button{
+        width:100%;
+        padding:12px;
+        background:#2c5364;
+        color:white;
+        border:none;
+        border-radius:5px;
+        cursor:pointer;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <h2>HOORA LOGIN</h2>
+
+    <input id="email" placeholder="Email">
+
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+</div>
+
+<script>
+
+    function login(){
+
+    let email=document.getElementById("email").value
+    let password=document.getElementById("password").value
+
+    fetch("/login",{
+
+    method:"POST",
+
+    headers:{
+    "Content-Type":"application/json"
+    },
+
+    body:JSON.stringify({
+    email:email,
+    password:password
+    })
+
+    })
+
+    .then(res=>res.text())
+
+    .then(data=>{
+
+    if(data==="success"){
+
+    localStorage.setItem("loggedInUserEmail",email)
+
+    window.location.href="/dashboard.html"
+
+    }else{
+
+    alert("Invalid login")
+
+    }
+
+    })
+
+    }
+
+</script>
+
+</body>
+</html>

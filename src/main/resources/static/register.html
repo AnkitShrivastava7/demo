@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hoora Register</title>
+
+    <style>
+
+        body{
+        font-family:Arial;
+        background:linear-gradient(135deg,#2c5364,#203a43,#0f2027);
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        }
+
+        .card{
+        background:white;
+        padding:40px;
+        width:350px;
+        border-radius:10px;
+        box-shadow:0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        h2{
+        text-align:center;
+        margin-bottom:25px;
+        }
+
+        input{
+        width:100%;
+        padding:12px;
+        margin:10px 0;
+        border:1px solid #ddd;
+        border-radius:5px;
+        }
+
+        button{
+        width:100%;
+        padding:12px;
+        background:#2c5364;
+        color:white;
+        border:none;
+        border-radius:5px;
+        cursor:pointer;
+        }
+
+        button:hover{
+        background:#1b3a47;
+        }
+
+        .footer{
+        text-align:center;
+        margin-top:15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <h2>REGISTER</h2>
+
+    <input id="name" placeholder="Name">
+
+    <input id="email" placeholder="Email">
+
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="register()">Register</button>
+
+    <div class="footer">
+        Already user? <a href="/login.html">Login</a>
+    </div>
+
+</div>
+
+<script>
+
+    function register(){
+
+    fetch("/register",{
+
+    method:"POST",
+
+    headers:{
+    "Content-Type":"application/json"
+    },
+
+    body:JSON.stringify({
+    name:document.getElementById("name").value,
+    email:document.getElementById("email").value,
+    password:document.getElementById("password").value
+    })
+
+    })
+
+    .then(res=>res.text())
+    .then(data=>alert(data))
+
+    }
+
+</script>
+
+</body>
+</html>
